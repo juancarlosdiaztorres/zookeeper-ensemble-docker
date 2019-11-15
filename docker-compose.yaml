@@ -1,0 +1,43 @@
+version: "3"
+services:
+    zoo1:
+        build: .
+        restart: always
+        tty: true
+        hostname: zoo1
+        ports:
+            - 2181:2181
+            - 2888
+            - 3888
+        entrypoint: /docker-entrypoint.sh
+        environment:
+            ZOO_MY_ID: 1
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2889:3889 server.3=zoo3:2890:3890
+
+    zoo2:
+        build: .
+        restart: always
+        hostname: zoo2
+        tty: true
+        ports:
+            - 2182:2181
+            - 2888
+            - 3888
+        entrypoint: /docker-entrypoint.sh
+        environment:
+            ZOO_MY_ID: 2
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2889:3889 server.3=zoo3:2890:3890
+
+    zoo3:
+        build: .
+        restart: always
+        hostname: zoo3
+        tty: true
+        ports:
+            - 2183:2181
+            - 2888
+            - 3888
+        entrypoint: /docker-entrypoint.sh
+        environment:
+            ZOO_MY_ID: 3
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2889:3889 server.3=zoo3:2890:3890
