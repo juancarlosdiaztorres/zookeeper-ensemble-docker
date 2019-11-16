@@ -18,7 +18,7 @@ After that, Zk ensemble is mounted and accesible using zkCli.sh.
 
 6. Modify /etc/hosts and add the following statement to create a DNS for Zknodes:
 
-	- Zookeeper nodes
+	Zookeeper nodes
 	172.18.0.2      zoo1
 	172.18.0.3      zoo2
 	172.18.0.4      zoo3
