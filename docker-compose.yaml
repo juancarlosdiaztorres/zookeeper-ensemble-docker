@@ -7,12 +7,15 @@ services:
         hostname: zoo1
         ports:
             - 2181:2181
-            - 2888
-            - 3888
+            - 2888:2888
+            - 3888:3888
         entrypoint: /docker-entrypoint.sh
+        networks:
+            LANDocker:
+                ipv4_address: 10.0.0.2
         environment:
             ZOO_MY_ID: 1
-            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2889:3889 server.3=zoo3:2890:3890
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
 
     zoo2:
         build: .
@@ -20,13 +23,16 @@ services:
         hostname: zoo2
         tty: true
         ports:
-            - 2182:2181
-            - 2888
-            - 3888
+            - 2181:2181
+            - 2888:2888
+            - 3888:3888
         entrypoint: /docker-entrypoint.sh
+        networks:
+            LANDocker:
+                ipv4_address: 10.0.0.3
         environment:
             ZOO_MY_ID: 2
-            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2889:3889 server.3=zoo3:2890:3890
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
 
     zoo3:
         build: .
@@ -34,10 +40,23 @@ services:
         hostname: zoo3
         tty: true
         ports:
-            - 2183:2181
-            - 2888
-            - 3888
+            - 2181:2181
+            - 2888:2888
+            - 3888:3888
         entrypoint: /docker-entrypoint.sh
+        networks:
+            LANDocker:
+                ipv4_address: 10.0.0.4
         environment:
             ZOO_MY_ID: 3
-            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2889:3889 server.3=zoo3:2890:3890
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+
+    networks:
+        LANDocker:
+            driver: bridge
+            ipam: 
+                driver: default
+                config:
+                    - subnet: 10.0.0.0/24
+
+
