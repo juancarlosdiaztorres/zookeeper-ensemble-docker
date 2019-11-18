@@ -51,12 +51,13 @@ services:
             ZOO_MY_ID: 3
             ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
 
-    networks:
-        LANDocker:
-            driver: bridge
-            ipam: 
-                driver: default
-                config:
-                    - subnet: 10.0.0.0/24
+networks:
+    LANDocker:
+        driver: bridge
+        internal: true
+        ipam: 
+            driver: default
+            config:
+                - subnet: 10.0.0.0/24
 
 
