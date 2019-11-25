@@ -56,39 +56,54 @@ services:
         restart: always
         hostname: bank1
         tty: true
-        volumes: 
-            - ./BankApp.jar:/zoo/BankApp.jar
         ports:
             - 80:80
         networks:
             LANDocker:
                 ipv4_address: 10.0.0.5
+        volumes: 
+            - ./BankApp.jar:/zoo/BankApp.jar
+        command: bash -c "java -jar /zoo/BankApp.jar 80 h1"
+        depends_on:
+            - zoo1
+            - zoo2
+            - zoo3
 
     bank2:
         image: openjdk:11
         restart: always
         hostname: bank2
         tty: true
-        volumes: 
-            - ./BankApp.jar:/zoo/BankApp.jar
         ports:
             - 80:80
         networks:
             LANDocker:
                 ipv4_address: 10.0.0.6
+        volumes: 
+            - ./BankApp.jar:/zoo/BankApp.jar
+        command: bash -c "java -jar /zoo/BankApp.jar 80 h2"
+        depends_on:
+            - zoo1
+            - zoo2
+            - zoo3
 
     bank3:
         image: openjdk:11
         restart: always
         hostname: bank3
-        volumes: 
-            - ./BankApp.jar:/zoo/BankApp.jar
         tty: true
         ports:
             - 80:80
         networks:
             LANDocker:
                 ipv4_address: 10.0.0.7
+        volumes: 
+            - ./BankApp.jar:/zoo/BankApp.jar
+        command: bash -c "java -jar /zoo/BankApp.jar 80 h3"
+        depends_on:
+            - zoo1
+            - zoo2
+            - zoo3
 
 networks:
     LANDocker:
