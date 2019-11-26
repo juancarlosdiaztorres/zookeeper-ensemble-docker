@@ -7,16 +7,17 @@ How to deploy:
 3. See container /tmp/myid file using docker exec -it {container-id} /bin/bash
 4. Check networks and zServers IP addresses using docker network inspect {network-id} [sudo docker network inspect zookeeper-ensemble-docker_default]
 
-At this point, Zookeeper is alive with a 3-quorum ensemble using 3 Docker containers using the IP addresses shown in docker-compose. 
+At this point, Zookeeper is alive with a 3-quorum ensemble using 3 Docker containers using the IP addresses shown in docker-compose.
 Furthermore, there are another 3 bank-containers running the App.
 
-Now it is possible to access to API.
+Since it's using "link", reaching a container from another one can be done by simply using the name. For example: ping bank2
 
-5. After that, it is time to configure ENV-VARs following CNVR Zookeeper Lab (page 4):
-	- Decompress file "tar xvfz zookeeper.tar.gz"
-	- Classpath config: "export CLASSPATH=$CLASSPATH:/home/jc/Desktop/cnvr/zoo/zookeeper-ensemble-docker/zookeeper-3.4.14/zookeeper-3.4.14.jar" and "export CLASSPATH=$CLASSPATH:/home/jc/Desktop/cnvr/zoo/zookeeper-ensemble-docker/zookeeper-3.4.14/lib/*".
-	- "export PATH=$PATH:/home/jc/Desktop/cnvr/zoo/zookeeper-ensemble-docker/zookeeper-3.4.14/bin"
+Assigned IPs:
+- zoo1: 10.0.0.2
+- zoo2: 10.0.0.3
+- zoo3: 10.0.0.4
+- bank1: 10.0.0.5
+- bank2: 10.0.0.6
+- bank3: 10.0.0.7
 
-After that, Zk ensemble is mounted and accesible using zkCli.sh.
-
-
+Now it is possible to access to its API. Just download Zookeeper (v.3.4.14 has been used here) and run bin/zkCli.sh
