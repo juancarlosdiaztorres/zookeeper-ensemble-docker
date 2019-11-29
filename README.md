@@ -1,7 +1,7 @@
 # Zookeeper-ensemble using Docker-compose
 Docker based Zookeeper managed by Docker-compose. Zookeeper version: 3.14.
 
-How to deploy:
+## Steps to reproduce the environment
 1. docker-compose up -d --build
 2. Check containers with docker ps -a
 3. See container /tmp/myid file using docker exec -it {container-id} /bin/bash
@@ -12,7 +12,7 @@ Furthermore, there are another 3 bank-containers running the App.
 
 Since it's using "link", reaching a container from another one can be done by simply using the name. For example: ping bank2
 
-Assigned IPs:
+## Assigned IPs:
 - zoo1: 10.0.0.2
 - zoo2: 10.0.0.3
 - zoo3: 10.0.0.4
